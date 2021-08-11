@@ -13,12 +13,20 @@ public class PlayerController : MonoBehaviour
 
     public GameObject[] weapons;
     public bool[] hasWeapons;
+    public GameObject[] grenades;
+    public int hasGrenades;
+    public GameObject grenadeObject;
+
+    public int maxHasGrenades;
+    
     Weapon equipWeapon;
     float fireDelay;
 
     bool sDown1;
     bool sDown2;
     bool sDown3;
+    bool sDown4;
+    bool gDown;
     bool isSwap;
     bool fDown;
     bool isFireReady;
@@ -28,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         Swap();
+        Grenade();
 
         switch (MyWeapon)
         {
@@ -48,6 +57,8 @@ public class PlayerController : MonoBehaviour
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
         sDown3 = Input.GetButtonDown("Swap3");
+        sDown4 = Input.GetButtonDown("Swap4");
+        gDown = Input.GetButtonDown("Fire2");
     }
 
     public enum WeaponType { Melee, Range };
@@ -86,6 +97,27 @@ public class PlayerController : MonoBehaviour
         JoyStick_Single.SetActive(false);
     }
     // Update is called once per frame
+
+    void Grenade()
+    {
+        if (hasGrenades == 0)
+            return;
+
+        if (gDown)
+        {
+                Vector3 nextVec = Vector3.forward;
+                nextVec.y = 5;
+                nextVec.z = 15;
+
+                GameObject instantGrenade = Instantiate(grenadeObject, transform.position, transform.rotation);
+                Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+                rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
+                rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+
+                hasGrenades--;
+                grenades[hasGrenades].SetActive(false);
+        }
+    }
     public void Attack()
     {
         equipWeapon.Use();
@@ -97,9 +129,10 @@ public class PlayerController : MonoBehaviour
         if (sDown1) weaponIndex = 0;
         if (sDown2) weaponIndex = 1;
         if (sDown3) weaponIndex = 2;
+        if (sDown4) weaponIndex = 3;
 
 
-        if ((sDown1 || sDown2 || sDown3))
+        if ((sDown1 || sDown2 || sDown3 || sDown4))
         {
             if (equipWeapon != null)
             {

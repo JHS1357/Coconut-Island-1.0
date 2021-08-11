@@ -11,8 +11,41 @@ public class PlayerController : MonoBehaviour
     public float SmoothMoveSpeed = 5.0f;
 
 
-    //public GameObject[] weapons;
-    //public bool[] hasWeapons;
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
+    Weapon equipWeapon;
+
+    bool sDown1;
+    bool sDown2;
+    bool sDown3;
+    bool isSwap;
+
+    Rigidbody rigid;
+    void Update()
+    {
+        GetInput();
+        Swap();
+
+        switch (MyWeapon)
+        {
+            case WeaponType.Melee:
+                JoyStick_Double.SetActive(false);
+                JoyStick_Single.SetActive(true);
+                break;
+
+            case WeaponType.Range:
+                JoyStick_Double.SetActive(true);
+                JoyStick_Single.SetActive(false);
+                break;
+        }
+
+    }
+    void GetInput()
+    {
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
+        sDown3 = Input.GetButtonDown("Swap3");
+    }
 
     public enum WeaponType { Melee, Range };
 
@@ -25,11 +58,10 @@ public class PlayerController : MonoBehaviour
     public GameObject JoyStick_Single;
 
     Animator anim;
-
-
     // Start is called before the first frame update
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         GameObject obj = Instantiate(Resources.Load("Prefabs/MiniMapIcon") as GameObject);
         myMinimapicon = obj.GetComponent<MinimapIcon>();
@@ -51,24 +83,44 @@ public class PlayerController : MonoBehaviour
         JoyStick_Single.SetActive(false);
     }
     // Update is called once per frame
-    void Update()
-    {
-        switch(MyWeapon)
-        {
-            case WeaponType.Melee:
-                JoyStick_Double.SetActive(false);
-                JoyStick_Single.SetActive(true);
-                break;
-
-            case WeaponType.Range:
-                JoyStick_Double.SetActive(true);
-                JoyStick_Single.SetActive(false);
-                break;
-        }
-        
-    }
     public void Attack()
     {
         anim.SetTrigger("doSwing");
+    }
+    public void Swap()
+    {
+        int weaponIndex = -1;
+        if (sDown1) weaponIndex = 0;
+        if (sDown2) weaponIndex = 1;
+        if (sDown3) weaponIndex = 2;
+
+
+        if ((sDown1 || sDown2 || sDown3))
+        {
+            if (equipWeapon != null)
+            {
+                equipWeapon.gameObject.SetActive(false);
+            }
+            equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
+            equipWeapon.gameObject.SetActive(true);
+
+            anim.SetTrigger("doSwap");
+
+            isSwap = true;
+
+            Invoke("SwapOut", 0.4f);
+        }
+    }
+    public void SwapOut()
+    {
+        isSwap = false;
+    }
+        void FreezeRotatoin()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+    void FixedUpdate()
+    {
+        FreezeRotatoin();
     }
 }

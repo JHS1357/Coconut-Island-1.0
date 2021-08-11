@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public int damage;
     public float rate;
     public BoxCollider meleeArea;
+    public TrailRenderer trailEffect;
 
     public void Use()
     {
@@ -27,13 +28,13 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         meleeArea.enabled = true;
+        trailEffect.enabled = true;
 
-
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(2.0f);
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(0.3f);
-
+        yield return new WaitForSeconds(1.0f);
+        trailEffect.enabled = false;
     }
 
 }

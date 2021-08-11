@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     public GameObject[] weapons;
     public bool[] hasWeapons;
     Weapon equipWeapon;
+    float fireDelay;
 
     bool sDown1;
     bool sDown2;
     bool sDown3;
     bool isSwap;
+    bool fDown;
+    bool isFireReady;
 
     Rigidbody rigid;
     void Update()
@@ -85,6 +88,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     public void Attack()
     {
+        equipWeapon.Use();
         anim.SetTrigger("doSwing");
     }
     public void Swap()
@@ -115,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         isSwap = false;
     }
-        void FreezeRotatoin()
+    public void FreezeRotatoin()
     {
         rigid.angularVelocity = Vector3.zero;
     }

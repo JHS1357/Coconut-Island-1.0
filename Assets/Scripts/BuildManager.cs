@@ -19,15 +19,15 @@ public class BuildManager : MonoBehaviour
     // 포탑 프리팹 넣는 곳
     public GameObject standardTurretPrefab;
 
-    private void Start()
-    {
-        BuildTurret = standardTurretPrefab;     
-    }
+    //private void Start()
+    //{
+    //    BuildTurret = standardTurretPrefab;     
+    //}
 
-    private GameObject BuildTurret;
+    //private GameObject BuildTurret;
 
     public GameObject GetBuildTurret()
     {
-        return BuildTurret;
+        return standardTurretPrefab;
     }
 }

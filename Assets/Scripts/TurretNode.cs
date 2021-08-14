@@ -31,7 +31,7 @@ public class TurretNode : MonoBehaviour
 	private void OnMouseDown()
 	{
 		// 포탑 설치 불가능
-		if (turret != null)
+		if (BuildManager.instance.GetBuildTurret() == null)
 		{
 			Debug.Log("포탑 설치 불가능 - TODO: 화면에 경고 띄우기");
 			return;

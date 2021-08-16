@@ -16780,9 +16780,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1389339493114790091, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389339493114790091, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389339493114790091, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389339493347865315, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389339493347865315, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.11
+      objectReference: {fileID: 0}
     - target: {fileID: 1389339493347865316, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389339493350472070, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
+      propertyPath: m_Name
+      value: GIRL1
       objectReference: {fileID: 0}
     - target: {fileID: 2509155980757406314, guid: c3c47dc91ef51a944b2c33d8b100f2bf, type: 3}
       propertyPath: JoyStick_Double

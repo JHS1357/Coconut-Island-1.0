@@ -121,7 +121,30 @@ public class PlayerController : MonoBehaviour
     public void Attack()
     {
         equipWeapon.Use();
-        anim.SetTrigger("doSwing");
+
+        switch (equipWeapon.type)
+        {
+            case Weapon.Type.Melee:
+                anim.SetTrigger("doSwing");
+                Debug.Log("doSwing");
+                break;
+
+            case Weapon.Type.Range:
+                anim.SetTrigger("doShot");
+                Debug.Log("doShot");
+                break;
+
+            case Weapon.Type.Hammer:
+                anim.SetTrigger("doStun");
+                Debug.Log("doStun");
+                break;
+
+            case Weapon.Type.Bomb:
+                anim.SetTrigger("doThrow");
+                Debug.Log("doThrow");
+                break;
+        }
+
     }
     public void Swap()
     {

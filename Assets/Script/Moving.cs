@@ -215,21 +215,6 @@ public class Moving : MonoBehaviour
             Item item = other.GetComponent<Item>();
             switch (item.type)
             {
-                case Item.Type.Ammo:
-                    ammo += item.value;
-                    if (ammo > maxAmmo)
-                        ammo = maxAmmo;
-                    break;
-                case Item.Type.Coin:
-                    coin += item.value;
-                    if (coin > maxCoin)
-                        coin = maxCoin;
-                    break;
-                case Item.Type.Heart:
-                    health += item.value;
-                    if (health > maxHealth)
-                        health = maxHealth;
-                    break;
                 case Item.Type.Grenade:
                     grenades[hasGrenades].SetActive(true);
                     hasGrenades += item.value;

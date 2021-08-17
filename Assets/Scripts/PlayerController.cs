@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     public GameObject grenadeObject;
 
     public int maxHasGrenades;
-    
-    Weapon equipWeapon;
+
+    public Weapon equipWeapon;
+    public int equipWeaponIndexNum;
     float fireDelay;
 
     bool sDown1;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         sDown3 = Input.GetButtonDown("Swap3");
         sDown4 = Input.GetButtonDown("Swap4");
         gDown = Input.GetButtonDown("Fire2");
+        
     }
 
     public enum WeaponType { Melee, Range };
@@ -165,6 +167,7 @@ public class PlayerController : MonoBehaviour
             equipWeapon.gameObject.SetActive(true);
 
             anim.SetTrigger("doSwap");
+            equipWeaponIndexNum = weaponIndex;
 
             isSwap = true;
 

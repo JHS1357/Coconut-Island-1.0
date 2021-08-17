@@ -6,17 +6,19 @@ using UnityEngine.UI;
 public class WeaponInvenCtrl : MonoBehaviour
 {
     static public WeaponInvenCtrl instance;
-    public int WeaponCount = 4;
+    public int weaponCount = 4;
     public bool[] usingWeapon = new bool[4];
     public Color usableWeapon = Color.blue;
     public Color unusableWeapon = Color.gray;
+
+    public int weaponIndex = 0;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
 
-        for (int i = 0; i < WeaponCount; i++) 
+        for (int i = 0; i < weaponCount; i++) 
         {
             usingWeapon[i] = false;
         }
@@ -32,11 +34,12 @@ public class WeaponInvenCtrl : MonoBehaviour
         if (usingWeapon[index] == false)
         {
             //무기교체신호 주기.
-            Debug.Log(index);
+            weaponIndex = index;
+            Debug.Log(weaponIndex);
             usingWeapon[index] = true;
         }
 
-        for (int i = 0; i < WeaponCount; i++)
+        for (int i = 0; i < weaponCount; i++)
         {
             if (i != index)
                 usingWeapon[i] = false;
@@ -47,7 +50,7 @@ public class WeaponInvenCtrl : MonoBehaviour
 
     void SetWeaponInventoryImage()
     {
-        for (int i = 0; i < WeaponCount; i++)
+        for (int i = 0; i < weaponCount; i++)
         {
             if (usingWeapon[i] == true)
                 this.transform.GetChild(i).GetComponent<Image>().color = unusableWeapon;

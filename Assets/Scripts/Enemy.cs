@@ -46,7 +46,9 @@ public class Enemy : MonoBehaviour
         this.transform.forward = Vector3.Lerp(this.transform.forward, dir, Time.deltaTime * rot_speed);
 
         // 상태이상 적용을 위해 추가한 코드
-        CheckStatus();
+        //살아있을때만 체크해야 속도조절 가능.
+        if(this.HP > 0)
+            CheckStatus();
 
         if (Vector3.Distance(transform.position, target.transform.position) <= 0.2f)
         {
@@ -75,6 +77,7 @@ public class Enemy : MonoBehaviour
 
     public void GetDamage(int dam)
     {
+        HP -= dam;
         //후에 디펜스도 추가.
         if (HP <= 0)
         {
@@ -86,9 +89,8 @@ public class Enemy : MonoBehaviour
             return;
 
         }
- 
-        HP -= dam;  
-        myAnimator.SetTrigger("Take Damage");
+        else
+            myAnimator.SetTrigger("Take Damage");
     }
 
 
@@ -147,7 +149,8 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Melee")
         {
-            GetDamage(other.GetComponent<Weapon>().damage);
+            if(this.HP >0)
+                GetDamage(other.GetComponent<Weapon>().damage);
         }
     }
 }
